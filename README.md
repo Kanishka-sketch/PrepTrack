@@ -1,27 +1,46 @@
-# 📌 PrepTrack
+# 🚀 PrepTrack
 
-**PrepTrack** is a personal placement preparation and interview tracking web application designed to help students organize and monitor their technical preparation in one place.
+**PrepTrack** is a personal placement preparation and interview tracking web application built to organize technical preparation in one place.
 
-It allows you to track **DSA practice, SQL practice, company preparation, and overall progress** through a simple web dashboard.
+It helps track **DSA topics, SQL practice, target companies, mock interviews, and overall preparation progress** through a simple dashboard.
 
-## 🚀 Features
+## 📸 Screenshots
 
-* 📊 **Dashboard** — View your overall preparation progress.
-* 💻 **DSA Tracker** — Add and track DSA topics and practice progress.
-* 🗄️ **SQL Tracker** — Manage SQL topics, difficulty levels, practice dates, and completion status.
-* 🏢 **Company Preparation** — Maintain a list of target companies and preparation status.
-* 📈 **Analytics** — Get an overview of your preparation progress.
-* 🔐 **User Authentication** — Login and registration functionality.
-* 📝 **Notes** — Add preparation notes for individual companies.
-* 🔄 **Status Tracking** — Update preparation status as your progress changes.
+### Dashboard
+![Dashboard](screenshots/Dashboard.png)
+
+### DSA Tracker
+![DSA Tracker](screenshots/Dsa.png)
+
+### SQL Tracker
+![SQL Tracker](screenshots/Sql.png)
+
+### Company Preparation
+![Company Preparation](screenshots/company.png)
+
+## ✨ Features
+
+* 📊 **Dashboard** — Get an overview of your preparation progress.
+* 💻 **DSA Tracker** — Add DSA topics and track their difficulty, practice date, and status.
+* 🗄️ **SQL Tracker** — Track SQL topics, difficulty levels, practice dates, and completion status.
+* 🏢 **Company Preparation** — Maintain a list of target companies and track preparation status.
+* 🎤 **Mock Interviews** — Keep track of mock interview preparation and progress.
+* 📈 **Analytics** — View preparation-related progress and statistics.
+* 🔐 **User Authentication** — Register and log in to your personal account.
+* 📝 **Notes** — Add useful preparation notes for companies.
+* 🔄 **Status Management** — Update preparation status as progress changes.
 
 ## 🛠️ Tech Stack
 
-* **Frontend:** HTML, CSS
-* **Backend:** Python, Flask
-* **Database:** SQLite
-* **Templating:** Jinja2
-* **Development Environment:** Visual Studio Code
+| Technology | Purpose                   |
+| ---------- | ------------------------- |
+| Python     | Backend programming       |
+| Flask      | Web framework             |
+| HTML       | Page structure            |
+| CSS        | Styling and UI            |
+| JavaScript | Client-side functionality |
+| Jinja2     | Template rendering        |
+| SQLite     | Database                  |
 
 ## 📂 Project Structure
 
@@ -52,6 +71,7 @@ PrepTrack/
 ├── config.py
 ├── create_db.py
 ├── run.py
+├── requirements.txt
 ├── .gitignore
 └── README.md
 ```
@@ -71,7 +91,7 @@ cd PrepTrack
 python -m venv venv
 ```
 
-Activate it on Windows:
+For Windows:
 
 ```bash
 venv\Scripts\activate
@@ -79,16 +99,8 @@ venv\Scripts\activate
 
 ### 3. Install dependencies
 
-If a `requirements.txt` file is available:
-
 ```bash
 pip install -r requirements.txt
-```
-
-Otherwise, install Flask:
-
-```bash
-pip install flask
 ```
 
 ### 4. Create the database
@@ -103,19 +115,19 @@ python create_db.py
 python run.py
 ```
 
-Open the application in your browser at:
+Open your browser and visit:
 
 ```text
 http://127.0.0.1:5000
 ```
 
-## 📋 How It Works
+## 📖 How It Works
 
-### DSA Preparation
+### 💻 DSA Preparation
 
-Add DSA topics and keep track of which concepts you have completed or are currently practicing.
+The DSA tracker allows you to record topics and monitor your practice progress.
 
-Examples:
+Example topics:
 
 * Arrays
 * Strings
@@ -125,23 +137,24 @@ Examples:
 * Graphs
 * Dynamic Programming
 
-### SQL Preparation
+### 🗄️ SQL Preparation
 
-Track SQL concepts based on difficulty and practice date.
+The SQL tracker helps organize SQL concepts according to difficulty and practice status.
 
-Examples:
+Example topics:
 
 * SELECT Queries
 * WHERE Clause
 * GROUP BY
+* HAVING
 * JOINs
 * Subqueries
 * CTEs
 * Window Functions
 
-### Company Preparation
+### 🏢 Company Preparation
 
-Add companies you are preparing for and maintain their preparation status.
+Add companies you are targeting and maintain their preparation status.
 
 Example:
 
@@ -153,36 +166,38 @@ Example:
 | Deloitte  | Not Started |
 | Amazon    | Not Started |
 
-Notes can also be added for each company to specify the areas that need preparation.
+You can also add notes such as the topics or interview areas that need more preparation.
 
-## 🎯 Purpose
+### 🎤 Mock Interviews
 
-The main goal of **PrepTrack** is to make placement preparation more organized and consistent by keeping important preparation activities in one application.
+The mock interview section helps keep track of interview practice and preparation activities.
 
-Instead of maintaining separate notes or spreadsheets, users can track their:
+## 🎯 Why I Built This
 
-**DSA → SQL → Companies → Interviews → Progress**
+I built **PrepTrack** to organize my placement preparation in one place.
 
-in one place.
+While preparing for technical interviews, I wanted a simple way to track my **DSA and SQL practice, target companies, mock interviews, and overall progress** instead of managing everything separately.
+
+The project also gave me an opportunity to practice building a complete web application using **Python, Flask, HTML, CSS, JavaScript, and SQLite**.
 
 ## 🔮 Future Improvements
 
-* [ ] Add more detailed analytics and progress charts
 * [ ] Add coding problem tracking
-* [ ] Add interview experience tracking
+* [ ] Add more detailed analytics and progress charts
 * [ ] Add reminders for pending topics
-* [ ] Add difficulty-based filtering
-* [ ] Add search and sorting functionality
 * [ ] Add preparation deadlines
-* [ ] Add more detailed company-wise preparation plans
+* [ ] Add search and filtering
+* [ ] Add company-wise preparation plans
+* [ ] Add interview experience tracking
+* [ ] Improve mobile responsiveness
 * [ ] Deploy the application online
 
 ## 👩‍💻 Author
 
 **Kanishka Joshi**
 
-Built as a personal project to organize and improve placement preparation.
+A personal project built to organize and improve placement preparation.
 
 ---
 
-⭐ If you find this project useful, consider giving the repository a star!
+⭐ If you find this project useful, feel free to star the repository.
