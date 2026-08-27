@@ -1,0 +1,171 @@
+/* =====================================================
+   GITHUB PRACTICE HEATMAP
+===================================================== */
+
+.heatmap-card{
+    border-radius:20px;
+    border:none;
+    overflow:hidden;
+}
+
+.github-calendar{
+    display:flex;
+    align-items:flex-start;
+    gap:12px;
+    overflow-x:auto;
+    padding:10px 0;
+}
+
+.github-calendar::-webkit-scrollbar{
+    height:8px;
+}
+
+.github-calendar::-webkit-scrollbar-thumb{
+    background:#d1d5db;
+    border-radius:20px;
+}
+
+.weekday-column{
+    display:grid;
+    grid-template-rows:repeat(7,16px);
+    row-gap:4px;
+    width:35px;
+    flex-shrink:0;
+    font-size:11px;
+    color:#6b7280;
+    margin-top:24px;
+}
+
+.weekday-column span{
+    display:flex;
+    align-items:center;
+}
+
+.calendar-wrapper{
+    display:flex;
+    flex-direction:column;
+    min-width:max-content;
+}
+
+.month-row{
+    display:grid;
+    grid-auto-flow:column;
+    grid-auto-columns:16px;   /* fixed: was 20px, now matches week-column stride */
+    column-gap:4px;
+    height:20px;
+    margin-bottom:6px;
+}
+
+.month-name{
+    font-size:11px;
+    color:#6b7280;
+    font-weight:600;
+    white-space:nowrap;
+}
+
+.calendar-grid{
+    display:flex;
+    gap:4px;
+}
+
+.week-column{
+    display:grid;
+    grid-template-rows:repeat(7,16px);
+    row-gap:4px;
+}
+
+.heat-cell{
+    width:16px;
+    height:16px;
+    border-radius:3px;
+    cursor:pointer;
+    transition:all .2s ease;
+    border:1px solid rgba(0,0,0,.05);
+}
+
+.heat-cell:hover{
+    transform:scale(1.25);
+    z-index:2;
+    box-shadow:0 4px 10px rgba(0,0,0,.15);
+}
+
+.future{
+    opacity:.25;
+}
+
+/* ========= COLORS ========= */
+
+.level-0{ background:#ebedf0; }
+.level-1{ background:#9be9a8; }
+.level-2{ background:#40c463; }
+.level-3{ background:#30a14e; }
+.level-4{ background:#216e39; }
+
+/* ========= LEGEND ========= */
+
+.heatmap-legend{
+    display:flex;
+    align-items:center;
+    gap:6px;
+    font-size:12px;
+}
+
+.legend-box{
+    width:14px;
+    height:14px;
+    border-radius:3px;
+}
+
+.legend-box.level-0{background:#ebedf0;}
+.legend-box.level-1{background:#9be9a8;}
+.legend-box.level-2{background:#40c463;}
+.legend-box.level-3{background:#30a14e;}
+.legend-box.level-4{background:#216e39;}
+
+/* ========= SUMMARY ========= */
+
+.heat-summary{
+    display:flex;
+    align-items:center;
+    gap:14px;
+    padding:16px;
+    border-radius:14px;
+    background:#f8fafc;
+}
+
+.summary-icon{
+    width:52px;
+    height:52px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:24px;
+    background:#e0f2fe;
+}
+
+.heat-summary h4{
+    margin:0;
+    font-size:24px;
+    font-weight:700;
+}
+
+.heat-summary small{
+    color:#6b7280;
+}
+
+.heat-summary span{
+    font-size:14px;
+    color:#6b7280;
+}
+
+/* ========= MOBILE ========= */
+
+@media(max-width:768px){
+    .github-calendar{
+        overflow-x:auto;
+    }
+    .heat-summary{
+        margin-bottom:10px;
+    }
+}

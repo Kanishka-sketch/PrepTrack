@@ -1,0 +1,123 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h3 class="fw-bold mb-4">
+    <i class="fas fa-chart-pie me-2"></i>Analytics Dashboard
+</h3>
+
+<div class="row">
+
+    <div class="col-lg-6 mb-4">
+        <div class="card shadow-sm">
+            <div class="card-header fw-bold">
+                DSA Problems by Difficulty
+            </div>
+            <div class="card-body">
+                <canvas id="dsaChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-6 mb-4">
+        <div class="card shadow-sm">
+            <div class="card-header fw-bold">
+                SQL Progress
+            </div>
+            <div class="card-body">
+                <canvas id="sqlChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="row">
+
+    <div class="col-lg-6 mb-4">
+        <div class="card shadow-sm">
+            <div class="card-header fw-bold">
+                Company Status
+            </div>
+            <div class="card-body">
+                <canvas id="companyChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-6 mb-4">
+        <div class="card shadow-sm">
+            <div class="card-header fw-bold">
+                Mock Interview Scores
+            </div>
+            <div class="card-body">
+                <canvas id="mockChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+
+    const dsaChart = new Chart(document.getElementById("dsaChart"), {
+        type: "pie",
+        data: {
+            labels: ["Easy", "Medium", "Hard"],
+            datasets: [{
+                data: [{{ easy }}, {{ medium }}, {{ hard }}]
+        }]
+    }
+});
+
+    const sqlChart = new Chart(document.getElementById("sqlChart"), {
+        type: "bar",
+        data: {
+            labels: ["Completed", "In Progress", "Not Started"],
+            datasets: [{
+                data: [{{ completed }}, {{ progress }}, {{ pending }}]
+        }]
+    }
+});
+
+    const companyChart = new Chart(document.getElementById("companyChart"), {
+        type: "doughnut",
+        data: {
+            labels: ["Planning", "Preparing", "Applied", "Interview", "Offer"],
+            datasets: [{
+                data: [
+                    {{ planning }},
+            {{ preparing }},
+                    {{ applied }},
+    {{ interview }},
+    {{ offer }}
+                 ]
+        }]
+    }
+});
+
+    const mockChart = new Chart(document.getElementById("mockChart"), {
+        type: "line",
+        data: {
+            labels: [
+                {% for m in mock_data %}
+                "{{ m.mock_date }}",
+            {% endfor %}
+        ],
+    datasets: [{
+        label: "Score",
+        data: [
+            {% for m in mock_data %}
+                    {{ m.score }},
+    {% endfor %}
+    ],
+        fill: false,
+            tension: 0.3
+        }]
+    }
+});
+
+</script>
+
+{% endblock %}

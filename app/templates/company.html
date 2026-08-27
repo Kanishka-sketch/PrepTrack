@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h4 class="fw-bold mb-4"><i class="fas fa-building me-2"></i>Company Preparation</h4>
+
+<div class="card mb-4">
+    <div class="card-header">Add New Company</div>
+    <div class="card-body">
+        <form method="POST" action="{{ url_for('main.add_company') }}">
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <label class="form-label fw-semibold">Company Name</label>
+                    <input type="text" name="company_name" class="form-control" placeholder="e.g. Google" required>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <label class="form-label fw-semibold">Status</label>
+                    <select name="status" class="form-select" required>
+                        <option value="">Select</option>
+                        <option value="Planning">Planning</option>
+                        <option value="Preparing">Preparing</option>
+                        <option value="Applied">Applied</option>
+                        <option value="Interview">Interview</option>
+                        <option value="Offer">Offer</option>
+                    </select>
+                </div>
+                <div class="col-md-5 mb-3">
+                    <label class="form-label fw-semibold">Notes</label>
+                    <input type="text" name="notes" class="form-control"
+                        placeholder="e.g. Prepare DSA and System Design">
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">
+                <i class="fas fa-plus me-1"></i>Add Company
+            </button>
+        </form>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-header">Your Companies ({{ companies|length }} total)</div>
+    <div class="card-body p-0">
+        <div class="table-responsive">
+            <table class="table table-hover mb-0">
+                <thead class="table-dark">
+                    <tr>
+                        <th>#</th>
+                        <th>Company Name</th>
+                        <th>Status</th>
+                        <th>Notes</th>
+                        <th>Update Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for company in companies %}
+                    <tr>
+                        <td>{{ loop.index }}</td>
+                        <td class="fw-semibold">{{ company.company_name }}</td>
+                        <td>
+                            {% if company.status == "Planning" %}
+                            <span class="badge bg-secondary">Planning</span>
+                            {% elif company.status == "Preparing" %}
+                            <span class="badge bg-warning text-dark">Preparing</span>
+                            {% elif company.status == "Applied" %}
+                            <span class="badge bg-primary">Applied</span>
+                            {% elif company.status == "Interview" %}
+                            <span class="badge bg-info text-dark">Interview</span>
+                            {% elif company.status == "Offer" %}
+                            <span class="badge bg-success">Offer</span>
+                            {% endif %}
+                        </td>
+                        <td>{{ company.notes }}</td>
+                        <td>
+                            <form method="POST" action="{{ url_for('main.update_company', id=company.id) }}"
+                                class="d-flex gap-2">
+                                <select name="status" class="form-select form-select-sm" style="width:140px;">
+                                    <option value="Planning" {% if company.status=="Planning" %}selected{% endif %}>
+                                        Planning</option>
+                                    <option value="Preparing" {% if company.status=="Preparing" %}selected{% endif %}>
+                                        Preparing</option>
+                                    <option value="Applied" {% if company.status=="Applied" %}selected{% endif %}>
+                                        Applied</option>
+                                    <option value="Interview" {% if company.status=="Interview" %}selected{% endif %}>
+                                        Interview</option>
+                                    <option value="Offer" {% if company.status=="Offer" %}selected{% endif %}>Offer
+                                    </option>
+                                </select>
+                                <button type="submit" class="btn btn-sm btn-outline-primary">Update</button>
+                            </form>
+                        </td>
+                        <td>
+                            <a href="{{ url_for('main.delete_company', id=company.id) }}" class="btn btn-danger btn-sm"
+                                onclick="return confirm('Delete this company?')">
+                                <i class="fas fa-trash"></i>
+                            </a>
+                        </td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="6" class="text-center text-muted py-4">
+                            No companies added yet. Add your first company above!
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

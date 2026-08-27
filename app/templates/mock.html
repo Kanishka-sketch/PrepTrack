@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h4 class="fw-bold mb-4"><i class="fas fa-clipboard-check me-2"></i>Mock Interviews</h4>
+
+<div class="card mb-4">
+    <div class="card-header">Add Mock Interview</div>
+    <div class="card-body">
+        <form method="POST" action="{{ url_for('main.add_mock') }}">
+            <div class="row">
+                <div class="col-md-3 mb-3">
+                    <label class="form-label fw-semibold">Interview Date</label>
+                    <input type="date" name="mock_date" class="form-control" required>
+                </div>
+
+                <div class="col-md-2 mb-3">
+                    <label class="form-label fw-semibold">Score</label>
+                    <input type="number" name="score" min="0" max="100" class="form-control" placeholder="0-100"
+                        required>
+                </div>
+
+                <div class="col-md-7 mb-3">
+                    <label class="form-label fw-semibold">Feedback</label>
+                    <input type="text" name="feedback" class="form-control"
+                        placeholder="e.g. Improve communication and DSA">
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary">
+                <i class="fas fa-plus me-1"></i>Add Interview
+            </button>
+        </form>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-header">
+        Your Mock Interviews ({{ interviews|length }} total)
+    </div>
+
+    <div class="card-body p-0">
+        <div class="table-responsive">
+            <table class="table table-hover mb-0">
+                <thead class="table-dark">
+                    <tr>
+                        <th>#</th>
+                        <th>Date</th>
+                        <th>Score</th>
+                        <th>Performance</th>
+                        <th>Feedback</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for interview in interviews %}
+                    <tr>
+                        <td>{{ loop.index }}</td>
+
+                        <td>{{ interview.mock_date }}</td>
+
+                        <td>{{ interview.score }}/100</td>
+
+                        <td>
+                            {% if interview.score >= 80 %}
+                            <span class="badge bg-success">Excellent</span>
+                            {% elif interview.score >= 60 %}
+                            <span class="badge bg-warning text-dark">Good</span>
+                            {% else %}
+                            <span class="badge bg-danger">Needs Improvement</span>
+                            {% endif %}
+                        </td>
+
+                        <td>{{ interview.feedback }}</td>
+
+                        <td>
+                            <a href="{{ url_for('main.delete_mock', id=interview.id) }}" class="btn btn-danger btn-sm"
+                                onclick="return confirm('Delete this interview?')">
+                                <i class="fas fa-trash"></i>
+                            </a>
+                        </td>
+                    </tr>
+
+                    {% else %}
+
+                    <tr>
+                        <td colspan="6" class="text-center text-muted py-4">
+                            No mock interviews added yet.
+                        </td>
+                    </tr>
+
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

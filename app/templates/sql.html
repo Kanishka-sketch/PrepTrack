@@ -1,0 +1,116 @@
+{% extends "base.html" %}
+{% block content %}
+<h4 class="fw-bold mb-4"><i class="fas fa-database me-2"></i>SQL Practice</h4>
+
+<!-- Add Topic Form -->
+<div class="card mb-4">
+    <div class="card-header">Add New SQL Topic</div>
+    <div class="card-body">
+        <form method="POST" action="{{ url_for('main.add_sql') }}">
+            <div class="row">
+                <div class="col-md-3 mb-3">
+                    <label class="form-label fw-semibold">Topic</label>
+                    <input type="text" name="topic" class="form-control" placeholder="e.g. Joins" required>
+                </div>
+                <div class="col-md-2 mb-3">
+                    <label class="form-label fw-semibold">Difficulty</label>
+                    <select name="difficulty" class="form-select" required>
+                        <option value="">Select</option>
+                        <option value="Easy">Easy</option>
+                        <option value="Medium">Medium</option>
+                        <option value="Hard">Hard</option>
+                    </select>
+                </div>
+                <div class="col-md-2 mb-3">
+                    <label class="form-label fw-semibold">Practice Date</label>
+                    <input type="date" name="practice_date" class="form-control" required>
+                </div>
+                <div class="col-md-2 mb-3">
+                    <label class="form-label fw-semibold">Status</label>
+                    <select name="status" class="form-select" required>
+                        <option value="">Select</option>
+                        <option value="Not Started">Not Started</option>
+                        <option value="In Progress">In Progress</option>
+                        <option value="Completed">Completed</option>
+                    </select>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">
+                <i class="fas fa-plus me-1"></i>Add Topic
+            </button>
+        </form>
+    </div>
+</div>
+
+<!-- Topics Table -->
+<div class="card">
+    <div class="card-header">Your SQL Topics ({{ topics|length }} total)</div>
+    <div class="card-body p-0">
+        <div class="table-responsive">
+            <table class="table table-hover mb-0">
+                <thead class="table-dark">
+                    <tr>
+                        <th>#</th>
+                        <th>Topic</th>
+                        <th>Difficulty</th>
+                        <th>Practice Date</th>
+                        <th>Status</th>
+                        <th>Update Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for topic in topics %}
+                    <tr>
+                        <td>{{ loop.index }}</td>
+                        <td class="fw-semibold">{{ topic.topic }}</td>
+                        <td>
+                            {% if topic.difficulty == 'Easy' %}
+                            <span class="badge bg-success">Easy</span>
+                            {% elif topic.difficulty == 'Medium' %}
+                            <span class="badge bg-warning text-dark">Medium</span>
+                            {% else %}
+                            <span class="badge bg-danger">Hard</span>
+                            {% endif %}
+                        </td>
+                        <td>{{ topic.practice_date }}</td>
+                        <td>
+                            {% if topic.status == 'Completed' %}
+                            <span class="badge bg-success">Completed</span>
+                            {% elif topic.status == 'In Progress' %}
+                            <span class="badge bg-info text-dark">In Progress</span>
+                            {% else %}
+                            <span class="badge bg-secondary">Not Started</span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            <form method="POST" action="{{ url_for('main.update_sql', id=topic.id) }}"
+                                class="d-flex gap-2">
+                                <select name="status" class="form-select form-select-sm" style="width:140px;">
+                                    <option value="Not Started">Not Started</option>
+                                    <option value="In Progress">In Progress</option>
+                                    <option value="Completed">Completed</option>
+                                </select>
+                                <button type="submit" class="btn btn-sm btn-outline-primary">Update</button>
+                            </form>
+                        </td>
+                        <td>
+                            <a href="{{ url_for('main.delete_sql', id=topic.id) }}" class="btn btn-danger btn-sm"
+                                onclick="return confirm('Delete this topic?')">
+                                <i class="fas fa-trash"></i>
+                            </a>
+                        </td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="7" class="text-center text-muted py-4">
+                            No topics added yet. Add your first SQL topic above!
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
