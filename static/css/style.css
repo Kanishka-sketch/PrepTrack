@@ -1,3 +1,60 @@
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.navbar {
+    position: sticky;
+    top: 0;
+    z-index: 1030;
+}
+
+.page-content {
+    flex: 1 0 auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.page-content > .row {
+    flex: 1 0 auto;
+}
+
+.sidebar {
+    min-height: 0;
+}
+
+.app-footer {
+    padding: 18px 0;
+    border-top: 1px solid #e1e5eb;
+    color: #E8EAED;
+    background-color: #1B2430;
+}
+
+.app-footer .container-fluid {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px 24px;
+}
+
+.app-footer-copy {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.app-footer-copy strong {
+    color: #E8EAED;
+}
+
+@media (max-width: 576px) {
+    .app-footer .container-fluid {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}
+
 /* =====================================================
    GITHUB PRACTICE HEATMAP
 ===================================================== */
